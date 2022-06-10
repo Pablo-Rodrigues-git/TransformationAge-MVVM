@@ -2,25 +2,38 @@ package com.training.ui.transformationage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.training.ui.transformationage.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var mainActivityViewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
+    private val  mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        setSupportActionBar(binding.toolbar)
 
         setListeners()
         setupObserver()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(R.menu.main_menu == R.id.action_adicionar) {
+            //TODO chamar tela de adicionar nova nota
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setListeners() {

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TransformationAge</string>
+    <string name="Dogs">Dogs</string>
+    <string name="toolbar_title">Adicionar</string>
+    <string name="button_description">Transformar</string>
+    <string name="dog_name_hint">Nome do cachorro</string>
+    <string name="item_recycler_description">Cachorro</string>
 </resources>
