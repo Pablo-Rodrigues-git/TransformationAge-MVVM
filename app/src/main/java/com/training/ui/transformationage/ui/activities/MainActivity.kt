@@ -4,17 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.ui.transformationage.ui.DogsAdapter
 import com.training.ui.transformationage.viewmodels.MainActivityViewModel
 import com.training.ui.transformationage.R
 import com.training.ui.transformationage.databinding.ActivityMainBinding
+import com.training.ui.transformationage.viewmodels.DogsViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityMainBinding
-    private val  mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-    val dogsadapter: DogsAdapter by lazy {
+
+    private lateinit var dogsViewModel: DogsViewModel
+
+    private val dogsadapter: DogsAdapter by lazy {
         DogsAdapter()
     }
 
@@ -24,8 +32,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        setListeners()
-        setupObserver()
+        recycler_view.adapter = dogsadapter
+        recycler_view.layoutManager = LinearLayoutManager(this)
+
+        dogsViewModel = ViewModelProviders.of(this).get(DogsViewModel::class.java)
+        dogsViewModel.getDogs().observe(this, Observer { data ->
+            data?.let {
+                if (it.isEmpty()) {
+                    Toast.makeText(this, "Lista vazia!", Toast.LENGTH_LONG).show()
+                } else {
+                    dogsadapter.add(it)
+                }
+            }
+        })
+
+        dogsViewModel.loadDogs()
+
+
+//        setListeners()
+//        setupObserver()
     }
 
 
@@ -36,26 +61,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(R.menu.main_menu == R.id.action_adicionar) {
+        if (R.menu.main_menu == R.id.action_adicionar) {
             //TODO chamar tela de adicionar nova nota
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setListeners() {
-        binding.apply {
-            var nameDog = nameDogEditText.toString()
-            var ageDog = ageDogEditText.toString()
+//    private fun setListeners() {
+//        binding.apply {
+//            var nameDog = nameDogEditText.toString()
+//            var ageDog = ageDogEditText.toString()
+//
+//            calculateButton.setOnClickListener {
+//                mainActivityViewModel.calculateAgeDog(5, "Bob")
+//            }
+//        }
+//    }
 
-            calculateButton.setOnClickListener {
-                mainActivityViewModel.calculateAgeDog(5, "Bob")
-            }
-        }
-    }
-
-    private fun setupObserver() {
-        mainActivityViewModel.result.observe(this, Observer {
-            binding.resultTextView.text = it
-        })
-    }
+//    private fun setupObserver() {
+//        mainActivityViewModel.result.observe(this, Observer {
+//            binding.resultTextView.text = it
+//        })
+//    }
 }

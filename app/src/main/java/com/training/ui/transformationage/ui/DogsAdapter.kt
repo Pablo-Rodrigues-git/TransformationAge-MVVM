@@ -17,11 +17,11 @@ class DogsViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class DogsAdapter( val data: MutableList<Dog> = mutableListOf()) :
+class DogsAdapter(val data: MutableList<Dog> = mutableListOf()) :
     RecyclerView.Adapter<DogsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dog, parent, false )
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_dog, parent, false)
         return DogsViewHolder(view)
     }
 
@@ -30,8 +30,14 @@ class DogsAdapter( val data: MutableList<Dog> = mutableListOf()) :
 
     override fun getItemCount(): Int = data.size
 
-    fun add(item: Dog){
+    fun add(item: Dog) {
         data.add(item)
+        notifyDataSetChanged()
+    }
+
+    fun add(itens: List<Dog>) {
+        data.clear()
+        data.addAll(itens)
         notifyDataSetChanged()
     }
 
