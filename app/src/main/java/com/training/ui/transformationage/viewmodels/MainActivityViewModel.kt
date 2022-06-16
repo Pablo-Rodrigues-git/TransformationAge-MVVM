@@ -1,4 +1,4 @@
-package com.training.ui.transformationage
+package com.training.ui.transformationage.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
