@@ -26,32 +26,19 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <EditText
-        android:id="@+id/ageDogEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="Idade do cachorro"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/nameDogEditText"
-        app:layout_constraintStart_toStartOf="@+id/nameDogEditText"
-        app:layout_constraintTop_toBottomOf="@+id/nameDogEditText" />
+<!--    <EditText-->
+<!--        android:id="@+id/ageDogEditText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Idade do cachorro"-->
+<!--        android:inputType="number"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/nameDogEditText"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/nameDogEditText"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nameDogEditText" />-->
 
-    <EditText
-        android:id="@+id/nameDogEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="@string/dog_name_hint"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view"
-        app:layout_constraintVertical_bias="0.502" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/calculateButton"
@@ -59,9 +46,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/button_description"
-        app:layout_constraintEnd_toEndOf="@+id/ageDogEditText"
-        app:layout_constraintStart_toStartOf="@+id/ageDogEditText"
-        app:layout_constraintTop_toBottomOf="@+id/ageDogEditText" />
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
     <TextView
         android:id="@+id/resultTextView"

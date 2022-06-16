@@ -1,20 +1,22 @@
 package com.training.ui.transformationage.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.training.ui.transformationage.ui.DogsAdapter
-import com.training.ui.transformationage.viewmodels.MainActivityViewModel
 import com.training.ui.transformationage.R
+import com.training.ui.transformationage.data.Dog
 import com.training.ui.transformationage.databinding.ActivityMainBinding
+import com.training.ui.transformationage.ui.DogsAdapter
 import com.training.ui.transformationage.viewmodels.DogsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_ui.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,7 +55,6 @@ class MainActivity : AppCompatActivity() {
 //        setupObserver()
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -61,10 +62,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (R.menu.main_menu == R.id.action_adicionar) {
-            //TODO chamar tela de adicionar nova nota
+        if (item.itemId == R.id.action_adicionar) {
+            dialogAddDog()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun dialogAddDog() {
+        val layout = LayoutInflater.from(this)
+            .inflate(R.layout.dialog_ui, null, false)
+
+        val inputDog = layout.nameDogEditText
+
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(layout)
+        dialog.setNegativeButton("Cancelar", null)
+        dialog.setPositiveButton("Salvar") { _, _ ->
+            //Salvar nota
+
+            val dog = Dog(id = 0, text = inputDog.text.toString())
+        }
+        dialog.create()
+        dialog.show()
     }
 
 //    private fun setListeners() {
